@@ -1,0 +1,128 @@
+\documentclass{invoice} % Use the custom invoice class (invoice.cls)
+
+\def \tab {\hspace*{3ex}} % Define \tab to create some horizontal white space
+\def \ttab {\hspace*{12ex}}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	HEADING SECTION
+%----------------------------------------------------------------------------------------
+
+\hfil{\Huge\bf APTsystems}\hfil % Company providing the invoice
+\bigskip\break % Whitespace
+\hrule % Horizontal line
+
+Večna pot 113 \hfill (000) 111-1111 \\ % Your address and contact information
+1000 Ljubljana \hfill jm8166@student.uni-lj.si
+\\ \\
+{\bf Naročnik} \\
+\tab Maestro, trgovska veriga d.d. \hfill  {\bf Datum:} \today \\
+\tab Večna pot 114 \hfill {\bf Številka ponudbe:} SI-01-6458\\
+\tab 1000 Ljubljana \hfill {\bf Datum zapadlosti:} 12. januar 2020\\
+\\
+%----------------------------------------------------------------------------------------
+%	TABLE OF EXPENSES
+%----------------------------------------------------------------------------------------
+
+\begin{center}
+    \begin{longtable}{@{\extracolsep{\fill}\hspace{\tabcolsep}} l r r r }
+        \hline
+        \textbf{Postavka} & \textbf{Količina} & \textbf{Enota} & \textbf{Znesek}\\
+        \hline
+        \textbf{1. Specifikacija zahtev} & 111 & ur & 12 550,00 \euro\\
+            \tab1.1 Analiza problemske domene\\
+            \tab1.2 Opredelitev zahtev\tab\\
+                \ttab Splošno\\
+                \ttab Intervjuji\\
+                \ttab Anketa\\
+            \tab1.3 Analiza zahtev\\
+            \tab1.4 Uskladitev zahtev s kupcem\\
+            \tab1.5 Potrditev zahtev s strani kupca\\
+
+        \textbf{2. Analiza IR} & 234 & ur & 26 500,00 \euro\\
+            \tab2.1 Izdelava modela sistema\\
+            \tab2.2 Izdelava modela razgradnje in tokov\\
+            \tab2.3 Izdelava procesnega modela\\
+            \tab2.4 Izdelava prototipa vmesnikov\\
+            \tab2.5 Izdelava predloge sistema\\
+            \tab2.6 Predstavitev modela sistema\\
+            \tab2.7 Predstavitev prototipov vmesnika\\
+            \tab2.8 Predstavitev predloge sistema\\
+            \tab2.9 Potrditev analize s strani kupca\\
+
+        \textbf{3. Izdelava načrta IR} & 77 & ur & 8700,00\euro\\
+            \tab3.1 Izdelava načrta podatkovne baze\\
+            \tab3.2 Izdelava načrta programskih modulov\\
+            \tab3.3 Izdelava načrta dokumentacije in uvajanja\\
+            \tab3.4 Izdelava načrta in strategije testiranja\\
+            \tab3.5 Izdelava načrta namestitve\\
+            \tab3.6 Izdelava načrta uvedbe\\
+            \tab3.7 Predstavitev načrta programskih modulov\\
+            \tab3.8 Predstavitev načrta namestitve, uvedbe in testiranja\\
+            \tab3.9 Potrditev načrta IR s strani kupca\\
+
+        \textbf{4. Izdelava IR} & 2950 & ur & 285 630,00\euro\\
+            \tab4.1 Izdelava programskega dela sistema\\
+            \tab4.2Priprava testnih primerov\\
+            \tab4.3 Testiranje IR v razvojnem okolju\\
+            \tab4.4 Izvedba nakupa in namestitve strojne opreme\\
+            \tab4.5 Poročanje o poteku izdelave sistema\\
+
+        \textbf{5. Testiranje IR (testno okolje)} & 190 & ur & 21 490,00 \euro\\
+            \tab5.1 Priprava testnih primerov\\
+            \tab5.2 Testiranje IR v testnem okolju\\
+            \tab5.3 Odprava ugotovljenih pomankljivosti\\
+
+        \textbf{6. Namestitev} & 102 & ur & 11 550,00 \euro\\
+            \tab6.1 Priprava strojne opreme\\
+            \tab6.2 Namestitev programske opreme\\
+            \tab6.3 Zagon in test namestitve\\
+        
+        \textbf{7. Uvedba in testiranje (produkcijsko okolje)} & 417 & ur & 47 200,00 \euro\\
+            \tab7.1 Priprava testnih primerov\\
+            \tab7.2 Testiranje v produkcijskem okolju\\
+            \tab7.3 Odprava ugotovljenih pomankljivosti\\
+            \tab7.4 Uvedba sistema\\
+            \tab7.5 Spremljanje sistema\\
+            \tab7.6 Predaja končnega sistema kupcu\\
+            
+        \textbf{8. Podpora} & 300 & ur & 34 000 \euro\\
+            \tab8.1 Spremljanje sistema\\
+            \tab8.2 Podpora in reševanje težav s sistemom\\
+        \hline
+        Skupaj pred popustom (brez DDV) & 4381 & ur & 437 620,00 \euro\\
+            \tab Popust & & & 28 850,00 \euro\\
+        Skupaj s popustom (brez DDV) & & & 408 770,00 \euro\\
+            \tab DDV & & & 89 929,40 \euro\\
+        \hline\hline
+        \textbf{Skupaj znesek} & & & \textbf{498 699,40 \euro}
+
+    \end{longtable}
+\end{center}
+
+\subsection*{Popust}
+    \begin{longtable}{@{\extracolsep{\fill}\hspace{\tabcolsep}} l r r }
+        \hline
+        \textbf{Postavka} & \textbf{Popust (v \%)} & \textbf{Znesek popusta}\\
+        \hline
+        \textbf{1. Specifikacija zahtev} & 94 & 11 850 \euro\\
+            \tab1.1 Analiza problemske domene\\
+            \tab1.2 Opredelitev zahtev\\
+                \ttab Splošno\\
+                \ttab Intervjuji\\
+                \ttab Anketa\\
+            \tab1.3 Analiza zahtev\\
+            \tab1.4 Uskladitev zahtev s kupcem\\
+        \textbf{2. Analiza} & 64 & 17 000\euro\\
+            \tab2.1 Izdelava modela sistema\\
+            \tab2.3 Izdelava procesnega modela\\
+            \tab2.4 Izdelava prototipov vmesnikov\\
+        \hline
+        \textbf{Skupaj popust} & 5 & 28 850 \euro\\
+    \end{longtable}
+
+Ponudbo pripravil: Jakob Marušič
+
+
+\end{document}

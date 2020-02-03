@@ -1,0 +1,637 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[slovene]{babel}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage[section]{placeins}
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+
+\lstset{
+numberstyle=\small, 
+numbersep=8pt, 
+frame = single, 
+language=SQL, 
+framexleftmargin=15pt}
+
+\begin{document}
+
+\title{Skripta za pripravo na ustni izpit:\\Razvoj informacijskih sistemov}
+\author{povzeto po predavanjih prof. Marka Bajca}
+
+\maketitle
+
+\chapter{Splošno o informacijskih sistemih}
+
+\paragraph{Informacijski sistem} opredelimo kot množico medsebojno odvisnih komponent,
+   med katere spadajo strojna in programska oprema ter ljudje, ki zbirajo, procesirajo,
+   hranijo in porazdeljujejo podatke in s tem podpirajo delavne procese v organizaciji.
+      
+
+\paragraph{Delitev IS} Informacijske sisteme delimo na \textbf{formalne} in \textbf{neformalne}. 
+Nefromalne IS ne moremo natančno definirati, saj ne vemo kako delujejo \textit{(npr. instinkt)}. Takšnih IS ne moremo sprogramirati.
+
+\section{Vrste informacijskih sistemov}
+
+   \paragraph{Transakcijski IS} pokriva vsako dnevne dogodke/transakcije (CDR - call data register).
+
+   \paragraph{Upravljalski (poslovodski) IS} omogočajo planiranje \textit{(npr. ali se na študijskem programu izplača povečati vpis)}
+
+   \paragraph{Direktorski IS}\mbox{}
+
+   \paragraph{Odločitveni IS} omogočajo svetovanje za sprejemanje odločitev, bazirajo na določenem modelu \textit{(npr. odobritev kredita na banki)}
+
+   \paragraph{Ekspertni IS} \textit{poskušajo} nadomestiti eksperta \textit{(npr. diagnostika pacienta na podlagi njegovih simptomov)}, osnovani so na \textbf{bazi znanja} (\textit{if/else} pravila)
+
+   \paragraph{Sistemi za avtomatizacijo/ Sistemi za podporo delovni procesom}\mbox{}
+
+   \subsection{Dellitev IS na ravni}
+      \paragraph{Operativna raven} je najnižja raven, ki vključuje predvsem transakcijske sisteme, kjer hranimo veliko količino neagregiranih podatkov.
+      Stopnja avtomatizacije je visoka, IS na tej ravni so visoko formalni.
+      \paragraph{Taktična raven} vmesna raven, kjer so podatki zmerno agregirani, še vedno je prisotna visoka stopnja formalnosti in avtomatizacije \textit{(npr. beleženje porabljenih enot v mobilnem paketu)}
+      \paragraph{Stratežka raven} je najvišja ravem na kateri so prisotni večinoma agregirani podatki. Takšni sistemi so povečini neformalni (ali zgolj delno formalni), avtomatizacije je malo ali ni prisotna.
+
+   \section{Življenjski modeli razvoja informacijskih sistemov}
+
+   \paragraph{Faze razvoja IS} Razvoj IS običajno delimo v naslednje faze:
+      \begin{enumerate}
+         \item analiza
+         \item načrtovanje
+         \item implementacija
+         \item testiranje
+         \item uvedba
+         \item vzdrževanje
+      \end{enumerate}
+   \paragraph{Življenjski model razvoja} \textit{(SDLC - system development life cycle)} pove sosledje in način izvedbe faz v okviru razvoja IS.
+
+   \pagebreak
+
+   \subsection{Pristopi k razvoju IS}
+   \subsubsection{Zaporedni ali slapovni pristop}
+   Ko se ena faza konča, se druga začne.
+
+   \begin{center}
+      \begin{tabular}{|c|c|}
+         \hline
+         \textbf{Faza} & \textbf{Cilj}\\
+         \hline
+         analiza & zahteve\\
+         načrtovanje & načrt\\
+         izvedba & koda\\
+         testiranje&\\
+         uvedba&IS\\
+         \hline
+      \end{tabular}
+   \end{center}
+
+   \paragraph{Prednosti in slabosti takšnega pristopa}\mbox{}
+   \begin{center}
+      \begin{tabular}{|c||c|}
+         \hline
+         \textbf{Prednosti} & \textbf{Slabosti}\\
+         \hline
+         malo režijskega dela & prepozno testiranje\\
+         & nenaravno\\
+         \hline
+      \end{tabular}
+   \end{center}
+
+   \subsubsection{Iterativni pristop}
+   Faze razvoja so razdeljene v iteracije, v vsaki iteraciji se izvedejo vse faze. Vsaka iteracija ima nek končni izdelek, ki je del celotne končne rešitve.
+
+   \begin{center}
+      \begin{tabular}{|c||c|}
+         \hline
+         \textbf{Prednosti} & \textbf{Slabosti}\\
+         \hline
+         povratne informacije & težko načrtovanje iteracij\\
+         \hline
+      \end{tabular}
+   \end{center}
+
+   \paragraph{Planiranje iteracij na makro ravni - release planing} celoten razvoj razdelimo na makro iteracije, vsaka izmed iteracij ima kot končen izdelek nek del informacijske rešitve.
+   Te iteracije imenujemo \textbf{release} in so omejene na 2-4 mesece. Pred zadnjim relesom moramo imeti izdelek, ki vsebuje vse minimalne zahteve projekta
+   \textbf{MVP - minimal value product}.
+
+   \paragraph{Planiranje iteracij na mikro ravni - iteration planing} Makro iteracije razdelimo na manjše iteracije, ki trajajo med enim in dvema tednoma.
+   V tem času želimo razviti del rešitve, ki sestavlja končen izdelek, ki ga želimo razvit v tem releasu. Iteracije delimo še na \textbf{task-e}.
+
+   \subsubsection{Prototipni pristop}
+   Temelji na delnih prototipnih izdelkih. Analizo in razvoj prototipa opravimo v začetku v celoti in kot rezultat pridobimo delovni prototip.
+   Ne \textbf{delovnem prototipu} potem izvajamo testiranje in uporabo, preko katerih se odločamo o nadaljnem razvoju in izboljšavah.
+
+   \subsubsection{Inkrementalni pristop}
+   Inkrementalni pristop nam omogoča, da projekt razdelimo na več samostojnih podproblemov. Vsak izmed podproblemov je samostojen del končne informacijske rešitve.
+   Vsak del razvijamo posebej ter ga ob zaključku predamo stranki v uporabo ter nadaljujemo z razvojem naslednjega podproblema.
+
+   \paragraph{MoSCoW} - \textit{must, should, could, won't}
+
+   \begin{center}
+      \begin{tabular}{|c||c|}
+         \hline
+         \textbf{Prednosti} & \textbf{Slabosti}\\
+         \hline
+         na začetku rešimo najbolj tvegane sklope & vseh IS ne moremo razdeliti\\& na samostojne enote\\
+         \hline
+      \end{tabular}
+   \end{center}
+
+   
+   
+   \section{Metodologije razvoja informacijskih sistemov}
+   
+   \paragraph{Metodologija} je zbirka filozofij, faz, postopkov, pravil, tehnik, orodij, dogovorov med sodelavci,... za razvijalce IS.
+
+   \subsection{Zgodovina metodologij}
+   \paragraph{do začetka 1970'} ni metodologij
+   
+   \paragraph{do zgodnjih '80} se začnejo pojavljati metodologije, ki dajejo poudarek na zajemu in analizi zahtev ter načrtovanju IR. 
+   \\\\Pojavijo se tehnike podatkovnega in procesnega modeliranja.
+
+   \paragraph{obdobje metodologije (do konca '90)} pojavi se velika količina novih metodologij, metodologije pridobijo veliko težo pri razvoju IR.
+
+   \paragraph{obdobje ponovne ovenitve metodologij (danes)} začenja se obdobje v katerem težke metodologije zamenjajo lahke, metodologije
+   postanejo odvisne in prilagojene potrebam programerja.
+
+   \pagebreak
+
+   \subsection{Formaliziranje metodologij}
+   Metodologije imajo različno stopnjo formalnosti, bolj kot je metodologija formalizirana natančneje določena je. 
+   Nedefinirane metodologije lahko povzročajo slabšo kvaliteto končnega izdelka, netransparentnost razvoja in težje vzdrževanje.
+
+   Po drugi strani lahko omogočajo hitrejši, lažji in bolj prilagodljiv razvoj.
+
+   \subsection{Vrste metodologij}
+   Metodologije lahko delimo po več kriterijih:
+   \begin{itemize}
+      \item življenjski cikel
+         \begin{itemize}
+            \item zaporedni
+            \item iterativni
+            \item prototipni
+         \end{itemize}
+      \item tehnike
+         \begin{itemize}
+            \item objektna
+            \item podatkovna
+            \item procesna
+            \item strukturna
+         \end{itemize}
+      \item teža metodologije
+      \begin{itemize}
+         \item obseg (število elementov, ki jih metodologija opisuje)
+         \item gostota (zahtevan nivo formalnosti)
+      \end{itemize}
+      \item utežitev metodologije
+      \begin{itemize}
+         \item spredaj utežena - poudarek na analizi \& načrtovanju
+         \item zadaj utežena - poudarek na kodiranju \& testiranju
+         \item uravnotežena
+      \end{itemize}
+   \end{itemize}
+
+   \paragraph{Komercialne metodologije}\mbox{}
+   \begin{itemize}
+      \item IE (information engineering)
+      \item SSADM
+      \item Rational Unified Process
+      \item STRADIS
+      \item agilne (lahke) metodologije
+      \begin{itemize}
+         \item XP - ekstremno programiranje
+         \item SCRUM
+         \item FDD
+      \end{itemize}
+   \end{itemize}
+
+\chapter{Strukturni razvoj}
+
+   \paragraph{Primer strukturne metodologije - informacijskih inženiring (IE)}\mbox{}
+   Osnovne značilnosti IE:
+   \begin{itemize}
+      \item povezana množica tehnik planiranja, analize, načrtovanja, razvoja in vzdrževanja  IR
+      \item pristop \textit{od zgoraj navzdol}
+      \item avtomatizacija razvoja
+      \item strateško planiranje
+      \item povečana produktivnost
+      \item predpostavlja: \textbf{poslovni sistemi so podatkovno, tehnični pa procesno ali dogodkovno usmerjeni}
+      \item posebej obravnavamo podatke in posebej aktivnosti
+   \end{itemize}
+   IE delimo na 4 faze:
+   \begin{enumerate}
+      \item strateško planiranje (kaj?)
+      \item analiza (kaj?)
+      \item načrtovanje (kako?)
+      \item izvedba (kako?)
+   \end{enumerate}
+
+   \pagebreak
+
+   \section{Strateško planiranje}
+   Strteško planiranje je proces izoblikovanja IS, ki organizaciji omogoča uresničitev ciljev in posredno zagotavlja konkurečno prednost.
+   
+   \paragraph{Cilj planiranja} je povezati razvoj IS s poslovno strategijo, načrtovanje pretoka informacij in procesov ter zmanjšati čas in stroške razvoja.
+
+   \paragraph{Primer razdelitve dokumenta strateškega planiranja}\mbox{}
+   \begin{enumerate}
+      \item pregled in analiza stanja
+      \item opredelitev poslovno-informacijske arhitekture
+      \item opredelitev informacijske vizije
+      \item opredelitev projektov
+      \item izdelava akcijskega načrta
+      \item spremljanje izvajanja in vzdrževanja strateškega plana
+   \end{enumerate}
+
+   \section{Zajem in specifikacija zahtev}
+   Osnovni namen je opredeliti IR na način, ki bo omogočal:
+   \begin{itemize}
+      \item pri nakupu IR izbirati med obstoječimi rešitvami
+      \item pri razvoju IR opredeliti osnovno funkcionalnost in druge nefunkcionalne zahteve ter omejitve za izgradnjo IR
+   \end{itemize}
+
+   Rezultat zajema je dokument (\underline{specifikacije}) z opredeljenimi funkcionalnostmi. Zajem zahtev opravi \underline{sistemski analitiki}
+   v sodelovanju s \underline{poznavalci} \underline{problemske domene} oz. uporabniki.
+
+   \paragraph{Osnovni koraki zajema}\mbox{}
+   \begin{enumerate}
+      \item zajem zahtev
+      \item ureditev zahtev
+      \item potrditev zahtev
+   \end{enumerate}
+
+   \subsection{Zajem zahtev}
+   V zajemu zahtev uporabimo različne tehnike, od izbire le teh je odvisna kakovost specifikacije (razgovori, vprašalniki, 
+   opazovanje dela, analiza obstoječega sistema,...).
+
+   \paragraph{Napotki pri zajemu zahtev}
+   \begin{itemize}
+      \item objektivnost
+      \item upoštevanje vseh možnosti
+      \item posvečanje podrobnostim
+      \item poudarek na novih in boljših rešitvah
+      \item brez zadržkov pri zajemanju zahtev
+   \end{itemize}
+
+   \subsection{Ureditev zahtev}
+   V tem koraku iz neformalno zapisanih zahtev oblikujemo formalno specifikacijo. \textbf{Specifikacija je dokument s formalno določenimi
+   zahtevami, ki jih mora končni sistem zajemati.} Specifikacija je posredno določena z izbrano metodologijo, agilne metodologije določajo
+   samo osnovne in okvirne zahteve, težke pa zahteve v celoti.\\
+
+   
+   Kvalitetna specifikacija je pravilna, celovita, nedvoumna, preverljiva, konsistentna in urejena po prioriteti/stabilnosti zahtev.
+   \\
+   
+   Ključni vidiki zahtev obsegajo:
+   \begin{itemize}
+      \item funkcionalnost
+      \item zmogljivost
+      \item omejitve implementacije
+      \item zunanje vmesnike
+   \end{itemize}
+   
+
+   Zahteve delimo na \textbf{funkcionalne}, ki zajemajo želene funkcionalnosti sistemov, in 
+   \textbf{nefunkcionalne}, ki se nanašajo na tehnične in druge nevsebinske zahteve.
+
+   \paragraph{Običajna struktura specifikacije}
+   \begin{enumerate}
+      \item opis namena IR in njenega podsistema
+      \item opis funkcionalnih zahtev
+      \item opis nefunkcionalnih zahtev
+      \item opis vmesnikov
+      \item slovar pojmov
+   \end{enumerate}
+
+   \subsection{Potrditev zahtev}
+   Specifikacijo potrdimo s strani naročnika preden nadaljujemo z nadaljnim razvojem IS.
+
+
+   \section{Analiza}
+   Osnovni namen analize je izdelati razumljiv opis poslovnega okolja, na katerega se nanaša IS.
+   \\\\
+   V analizi izdelamo \textbf{model sistema}, da na formalen način opredelimo potrebne podatkovne strukture in funkcije, ki
+   te podatke uporabljajo.
+   
+   \paragraph{KAJ naj sistem podpira? (Rezultat analize)}
+   \begin{itemize}
+      \item model sistema
+      \item predlog tehnične arhitekture
+      \item prototip komponent uporabniškega vmesnika
+      \item strategija testiranja
+   \end{itemize}
+   Postopke analize izvajajo \textbf{sistemski analitik, sistemski arhitekt} in ključni uporabnik.
+
+   \subsection{Izdelava modela sistema}
+   Pri strukturnem razvoju v času analize razvijemo 3 modele s katerimi si lažje viziualiziramo končni sistem
+   \begin{enumerate}
+      \item podatkovni modeli (konceptualni podatkovni model, entiteta-razmerje)
+      \item procesni modeli (diagram razgradnje, diagram podatkovnih tokov, procesni diagrami)
+      \item modeli procesne logike
+   \end{enumerate}
+
+   Modeli so izdelani v polformalnih tehnikah.
+
+   \paragraph{Diagrami podatkovnih tokov} se fokusirajo na vhodne in izhodne podatke, ki jih potrebuje/proizvede nek proces.
+   V modelu so vidni tokovi podatkov med podatkovnimi skladišči, funkcijami in zunanjimi sistemi, ne pa tudi sosledje dogodkov.
+
+   \paragraph{Procesni diagram} prikazuje tok dogodkov ali potek določenega procesa.
+
+   \paragraph{Model procesne logike} dopolnjuje procesni model, predvsem tiste procese, ki niso dovolj jasno definirani. Uporabljamo različne tehnike:
+   \begin{itemize}
+      \item strukturiran jezik
+      \item odločitvene tabele
+      \item odločitvena drevesa
+      \item diagram prehajanja stanj
+   \end{itemize}
+
+   \subsection{Izdelava prototipov}
+   Gre za neobvezen (ampak priporočljiv) korak, katerega cilj je prikazati izgled in osnovne funkcionalnosti sistema.
+
+   \subsection{Izdelava predloge sistema (predlog tehnične arhitekture)}
+   V okviru predloga definiramo komunikacijsko, programsko in strojno arhitekturo, ki je potrebna za vzpostavitev razvojnega, testnega in produkcijskega okolja.
+
+   \paragraph{Delitev okolji} V času razvoja IR uporabljamo več vzporednih okolji (vsaj 2):
+   \begin{enumerate}
+      \item razvojno okolje
+      \item testno okolje (ponovljivi testi)
+      \item staging (kopija produkcije)
+      \item produkcijsko
+   \end{enumerate}
+
+   \paragraph{Primer predloge}
+   \begin{enumerate}
+      \item Arhitektura sistema
+      \begin{enumerate}
+         \item ...
+      \end{enumerate}
+      \item Postopki, predpisi, standardi
+      \begin{enumerate}
+         \item ...
+      \end{enumerate}
+   \end{enumerate}
+
+   \subsection{Opredelitev strategije testiranja}
+   Opredelitev strategije testiranja je prva aktivnost v okviru testiranja.
+   \begin{itemize}
+      \item Kaj je predmet testiranja?
+      \item Kdo bo testiral, kaj, kdaj in kako?
+      \item Kje bo testno okolje?
+      \item Struktura  testov
+      \item ...
+   \end{itemize}
+
+   \subsection{Predstavitev rezultatov analize}
+   Na koncu analize njene rezultate predstavimo končnemu uporabniku in nadaljujemo z načrtovanjem IS.
+
+   \section{Načrtovanje}
+   Glavni namen načrtovanja je izdelava načrta glede na specifikacije zbrane v analizi, načrt nam pove \textit{\textbf{kako}} sistem izdelamo.
+
+   \paragraph{Cilj načrtovanja}
+   \begin{itemize}
+      \item izdelati načrt IR, ki ustreza analizi in upošteva tehnične omejitve
+      \item dokumentirati specifikacije načrta tako, da omogoča nadaljno vzdrževanje sistema
+      \item zasnovati strategijo prehoda na novo aplikacijo
+   \end{itemize}
+
+   \paragraph{Rezultati načrtovanja}
+   \begin{itemize}
+      \item načrt podatkovne baze
+      \item načrt programskih modulov
+      \item \textit{načrt dokumentacije}
+      \item \textit{načrt testiranja}
+      \item \textit{načrt namestitve in uvedbe}
+   \end{itemize}
+   Pri načrtovanju sodelujejo: načrtovalec podatkovne baze, načrtovalec aplikacije, skrbnik podatkovne baze, izdelovalec dokumentacije,
+   uvajalec, poslovni lastnik in končni uporabnik.
+
+   \subsection{Izdelava načrta podatkovne baze}
+   Iz procesnega modela, ki smo ga pripravili v analizi, oblikujemo logični in/ali fizični model podatkovne baze, ki ustreza tehnični arhitekturi.
+
+   \subsection{Izdelava načrta programskih modulov}
+   Namen je prikazati kako bodo bili, v analizi identificirani, procesi in funkcije v končni IR prikazani.
+
+   \subsection{Izdelava načrta dokumentacije}
+   Z aktivnostjo želimo določiti obseg in strukturo dokumentacije ter izbiro standardov in vzorcev. Dokumentacijo delimo na:
+   \begin{itemize}
+      \item uporabniško dokumentacijo
+      \item sistemsko-tehnično dokumentacijo
+      \begin{itemize}
+         \item podatkovni model
+         \item arhitektura sistema
+         \item komponente sistema
+         \item opis testnega, razvojnega in produkcijskega okolja
+         \item ...
+      \end{itemize}
+      \item navodila za operativno skrbništvo
+      \begin{itemize}
+         \item izdelava varnostnih kopij
+         \item izklop sistema
+         \item posodabljanje sistema
+         \item ...
+      \end{itemize}
+   \end{itemize}
+
+   \subsection{Izdelava načrta testiranja}
+   Najpomebnejša lastnost testov je njihova \textbf{ponovljivost}, v sklopu načrtovanja pripravimo načrt testiranja, ki opredeljuje:
+   \begin{itemize}
+      \item kdo testira
+      \item kaj testira
+      \item kako testira
+      \item kdaj in zakaj testira
+   \end{itemize}
+
+   \subsection{Izdelava načrta namestitve in uvedbe}
+   Načrt namestitve in uvedbe definira uvedbo v testno in producijsko okolje, ter med drugim tudi kdo bo kaj tetsiral 
+   (v razvoju razvojna ekipa, v testnem in produkcijskem pa tudi končni uporabniki).
+   \\\\
+   Načrt vsebuje:
+   \begin{itemize}
+      \item načrt namestitve
+      \item načrt dodelitve pravic
+      \item načrt prevedbe podatkov (iz starega v nov sistem)
+      \item načrt uvajanja
+      \item načrt za izvedbo prevzemnega in končnega testa
+      \item načrt prehoda na nov sistem
+   \end{itemize}
+
+   \subsection{Testiranje}
+   S testiranjem želimo doseči preverjeno delujočo aplikacijo. V okviru razvoja IR se različna testiranja izvajajo različno pogosto in ob različnih časih.
+   Teste delimo na:
+   \begin{itemize}
+      \item teste programskih enot
+      \item teste integracije
+      \item sistemske teste
+      \item teste sprejemljivosti
+   \end{itemize}
+
+   Izvajalci testov so razvijalci (predvsem v razvojnem okolju), preizkuševalci (sistematično testiranje v testnem okolju) in
+   končni uporabniki (testno in produkcijsko okolje).
+
+
+   \section{Namestitev in uvedba}
+   \subsection{Prehod na nov sistem}
+   
+   \paragraph{Fazni pristop} star sistem nadomestimo z novim v več korakih, pri čemer oba sistema delujeta medseboj. Potreben je razvoj
+   vmesnikov, ki omogočajo komunikacijo med sistemoma. Postopno lahko sistem menjujemo po področjih, lokacijah, modulih,...
+
+   \paragraph{Zamenjava ali vse naenkrat} velik riziko, saj star sistem ne deluje več, novega pa v produkcijskem okolju še nismo testirali.
+
+   \paragraph{Vzporedno delovanje} starega in novega sistema. Je najbolj varen način, vendar podvaja delo končnemu uporabniku.
+
+
+\chapter{Objektni razvoj}
+
+   Glavne razlike v primerjavi s strukturnim razvojem so pri analizi, načrtovanju in izvedbi.
+
+   \paragraph{Objekt} lahko predstavlja fizično entiteto ali koncpetualni pojem. S stališča razvoja IR je objekt koncept,
+   abstrakcija z natančno določenimi mejami in lastnostmi, ki so pomemben za IR. Objekt ima:
+      \begin{itemize}
+         \item stanje (objekt se zaveda svojega stanja - lahko \textit{pove} svoje stanje)
+         \item obnašanje (funkcije, ki jih objekt \textit{dela} in kar se z njim da delati \textit{"pisalo piše" - kdo piše?"})
+         \item entiteto
+      \end{itemize}
+   Odnos med objektom in razredom je podobno odnosu med entiteto in entitetnim tipom.
+
+   \paragraph{Enkapsulacija ali skrivanje podatkov}
+   O objektu ne rabimo vedeti vsega, ampak samo tisto, kar potrebujemo za njegovo uporabo (vmesnik). 
+   Enkapsulacija zahteva, da skrijemo:
+      \begin{itemize}
+         \item implementacijo obnašanja, ki je na voljo prek vmesnika
+         \item podatke znotraj objekta, ki so potrebni za implementacijo obnašanja in beležijo stanje objekta v trenutku obstoja
+      \end{itemize}
+
+      \paragraph{Dedovanje in hierhija} Dedovanje uporabimo, da nekemu razredu dodelimo lastnosti nekega drugega, dedovanega razreda.
+      \textit{Npr. študent in delavec oba dedeujeta lastnosti kot so ime in priimek od razreda oseba.}
+
+      \paragraph{UML} je standariziran nabor tehnik za modeliranje objektnih sistemov, med UML diagrame umeščamo: razredne, komponetne, use-case diagrame, diagrame stanj,\dots
+
+      \section{Osnove procesa objektnega razvoja RUP}
+      \textbf{RUP} rational unified process (proces določa kdo, kdaj, kaj dela)
+
+      \paragraph{Glavne značilnosti RUP}
+         \begin{itemize}
+            \item snernice za učinkovit razvoj
+            \item zmanjšuje tveganje, povečuje predvidljivost
+            \item zajema in vpeljuje najboljše izkušnje (učenje iz izkušenj,\dots)
+            \item pospešuje vizijo
+            \item vpeljuje načrt za vpeljavo
+         \end{itemize}
+
+      \paragraph{6 najboljših praks v razvoju IR, ki jih vpeljuje RUP}
+         \begin{center}
+            \begin{tabular}{|c|}
+               \hline
+               iterativen razvoj\\
+               \hline
+               \begin{tabular}{c|c|c|c}
+                  obvladovanje & uporaba  & virtualno & preverjanje\\
+                  zahtev & komponentne arhitekture & modeliranje & kakovosti\\
+               \end{tabular}\\
+               \hline
+               nadzorovanje sprememb\\
+               \hline
+            \end{tabular}
+         \end{center}
+
+      \paragraph{Arhitekrura IR} določa smernice razvoja, zgradbo izdelka in sestavo skupine.
+      RUP daje velik poudarek na arhitekturo že v začetnih iteracijah zato zahteva 4+1 pogled:
+         \begin{itemize}
+            \item logični pogled (analitik/razvijalec) - zgradba sistema
+            \item izvedbeni pogled (programer) - upravljanje
+            \item postavitveni pogled (sistemski inženir) - topologija sistema
+            \item procesni pogled (sistemski poznavalec)
+            \item primer uporabe (končni uporabnik) - funkcionalnost
+         \end{itemize}
+      
+      \paragraph{Kaj še omogoča RUP?}
+         \begin{itemize}
+            \item vzpostavitev in ohranitev nadzora nad projektom
+            \item obvladovanje kompleksnosti
+            \item vzdrževanje celovitosti sistema
+            \item razširanje možnosti ponovne uporabe
+            \item pospeševanje komponentno usmerjen razvoja
+         \end{itemize}
+
+      \subsection{RUP faze}
+      \begin{itemize}
+         \item začetna faza - vzpostavitev sistema, opredelitev okvirjev in načrtovanje virov
+         \item zbiranje informacij - specifikacija zahtev, načrtovanje virov
+         \item konstrukcija - razvoj sistema
+         \item prevzem - predaja izdelka
+      \end{itemize}
+
+      \section{Zajem zahtev}
+      Namen zajema zahtev je doseči soglasje s stranko oz. uporabnikom, kaj naj sistem dela. Na drugi strani omogočimo
+      razvijalcem boljše razumevanje zahtev sistema ter določimo meje sistema, ki nam zagotavljajo osnovo za načrtovanje tehnične vsebine.
+
+      RUP, za razliko od strukturnega razvoja, vpeljuje višjo stopnjo formalnosti:
+      \begin{itemize}
+         \item primeri uporabe
+         \item opisi s tokovi dogodkov
+         \item uporaba drugih tehnik UML v posebnih primerih (diagrami stanj, diagrami aktivnosti, diagrami iterakcije)
+      \end{itemize}
+
+      \paragraph{Diagram primerov uporabe} prikazuje primere uporabe ter akterje, ki primere uporabe uporabljajo.
+      Znotraj posameznih primerov uporabe določimo še tok dogodkov (vsak tok dogodkov ima osnovni in enega ali več alternativnih tokov),
+      ki opisuje zaporedje izvajanja posameznih dogodkov.
+      \\\\
+      Pri izdelavi modela uporabe najprej definiramo akterje ter primere uporabe, ki jih med seboj povežemo. V primeru odvečnih
+      primerov uporabe, akterjev ali povezav jih pri pregledu odstranimo.
+      \\\\
+      Poleg primerov uporabe in \textbf{opisov primerov uporabe} v fazi analize definiramo še \textbf{slovar} in \textbf{dodatne specifikacije}, 
+      ki zajemajo funkcionalnosti, uporabnost, zanesljivost, učinkovitost, podporo in omejitve pri načrtovanju.
+
+      \section{Objekta analize in načrtovanja}
+      \paragraph{Primerjava faz analize in načrtovanja}
+      \begin{center}
+         \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Analiza} & \textbf{Načrtovanje} \\
+            \hline
+            razumevanje problema & razumevanje rešitve\\
+            idealiziramo načrtovanje & operacije in atributi\\
+            obnašanje & zmogljivost\\
+            struktura sistema & blizu programski kodi\\
+            funkcijske zahteve & nefunkcionalne zahteve\\
+            majhen model & velik model \\
+            & življenjski cikel objektov\\
+            \hline
+         \end{tabular}
+      \end{center}
+
+   \subsection{Analiza arhitekture}
+   \paragraph{Identifikacija ključnih abstrakcij} skozi modele iz analize in zajema zahtev izluščimo najpomembnejše (ključne) objekte (abstrakcije).
+
+   \paragraph{Analiza potreb po sistemskih virih} kot so trajnost, procesna komunikacija, porazdeljevanje, obvladovanje transakcij, varnost,\dots
+
+   \paragraph{Opredelitev arhitekturne ravni} predstavljajo aplikacijo z različnih nivojev abstrakcije, primeri:
+      \begin{itemize}
+         \item model-view-controller
+         \item pipes and filters
+         \item blackboard
+      \end{itemize}
+   Aplikacija lahko uporablja več arhitekturnih vzorcev. Organiziranost arhitekturnih ravni pokažemo s paketi, ti so
+   elementi sistema, ki lahko vključujejo druge elemente modela.
+
+
+   \subsection{Analiza primerov uporabe}
+   \paragraph{Dopolnitev opisov primerov uporabe} primere uporabe dopolnimo s podatki, ki so potrebni za nadaljni razvoj.
+
+   \paragraph{Identifikacija potrebnih razredov za realizacijo posameznih primerov uporabe} 
+   Razrede v osnovi delimo na kontrolne (en primer uporabe ima navadno enega), mejne (za vsak zunanji sistem imamo enega)
+   in entitetne (poslovni razredi s katerimi hranimo in upravljamo podatke). 
+   Med razredi definiramo tudi povezave (te so lahko neusmerjene ali usmerjene), ki jih poimenujemo in določimo števnost.
+
+   \paragraph{Razdelitev odgovornosti posameznim razredom}
+   Z uporabo diagrama zaporedja iz primera uporabe definiramo kateri razred izvede katero izmed aktivnosti. 
+   Mejni razredi prevzamejo odgovornosti komunikacije z akterji, poslovni podatke, kontrolni pa (običajno) pomembnejši del toka dogodkov.
+
+   \paragraph{Podrobna analiza potrebnih sistemskih virov} Sestavimo seznam vseh potrebnih sistemskih storitev ter razredov, ki potrebujejo sistemske storitve.
+   V tem delu tudi opišemo lastnosti sistemskih storitev.
+
+   \paragraph{Poenotenje razredov pridobljenih z analizo}
+
+\end{document}

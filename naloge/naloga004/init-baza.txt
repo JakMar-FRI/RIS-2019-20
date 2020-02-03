@@ -1,0 +1,376 @@
+/*==============================================================*/
+/* Table: avtobusno_postajalisce                                */
+/*==============================================================*/
+create table avtobusno_postajalisce
+(
+   ime_postajalisca               varchar(20),
+   id_postajalisca                int                            not null,
+   naslov_id                      int                            not null,
+   primary key (id_postajalisca)
+);
+
+/*==============================================================*/
+/* Index: se_nahaja_na_FK                                       */
+/*==============================================================*/
+create index se_nahaja_na_FK on avtobusno_postajalisce
+(
+   naslov_id
+);
+
+/*==============================================================*/
+/* Table: cenik                                                 */
+/*==============================================================*/
+create table cenik
+(
+   id_postavke                    int                            not null,
+   cena                           float(8,2),
+   ime_postavke                   varchar(20),
+   primary key (id_postavke)
+);
+
+/*==============================================================*/
+/* Table: kraj                                                  */
+/*==============================================================*/
+create table kraj
+(
+   kraj                           varchar(20),
+   postna_stevilka                char(4)                        not null,
+   primary key (postna_stevilka)
+);
+
+/*==============================================================*/
+/* Table: naslov                                                */
+/*==============================================================*/
+create table naslov
+(
+   hisna_stevilka                 varchar(5),
+   naslov_id                      int                            not null,
+   postna_stevilka                char(4)                        not null,
+   ulica                          varchar(20)                    not null,
+   primary key (naslov_id)
+);
+
+/*==============================================================*/
+/* Index: v_ulici_FK                                            */
+/*==============================================================*/
+create index v_ulici_FK on naslov
+(
+   postna_stevilka,
+   ulica
+);
+
+/*==============================================================*/
+/* Table: postajalisce_proga                                    */
+/*==============================================================*/
+create table postajalisce_proga
+(
+   id_postajalisca                int                            not null,
+   id_proge                       int                            not null,
+   stevilka_postanka              int,
+   cas_prihoda                    time,
+   cas_odhoda                     time,
+   primary key (id_postajalisca, id_proge)
+);
+
+/*==============================================================*/
+/* Index: se_ustavlja_na_FK                                     */
+/*==============================================================*/
+create index se_ustavlja_na_FK on postajalisce_proga
+(
+   id_postajalisca
+);
+
+/*==============================================================*/
+/* Index: ima_postanek_FK                                       */
+/*==============================================================*/
+create index ima_postanek_FK on postajalisce_proga
+(
+   id_proge
+);
+
+/*==============================================================*/
+/* Table: "postavka račun"                                      */
+/*==============================================================*/
+create table "postavka račun"
+(
+   stevilka_racuna                int                            not null,
+   id_postavke                    int                            not null,
+   primary key (stevilka_racuna, id_postavke)
+);
+
+/*==============================================================*/
+/* Index: postavka_za_FK                                        */
+/*==============================================================*/
+create index postavka_za_FK on "postavka račun"
+(
+   stevilka_racuna
+);
+
+/*==============================================================*/
+/* Index: postavka_na_FK                                        */
+/*==============================================================*/
+create index postavka_na_FK on "postavka račun"
+(
+   id_postavke
+);
+
+/*==============================================================*/
+/* Table: prevoz                                                */
+/*==============================================================*/
+create table prevoz
+(
+   id_proge                       int                            not null,
+   id_prevoza                     int                            not null,
+   hitra_linija                   tinyint(1),
+   rezervacija                    tinyint(1),
+   st_rezervacij                  int,
+   primary key (id_proge, id_prevoza)
+);
+
+/*==============================================================*/
+/* Index: na_liniji_FK                                          */
+/*==============================================================*/
+create index na_liniji_FK on prevoz
+(
+   id_proge
+);
+
+/*==============================================================*/
+/* Index: se_izvaja_na_FK                                       */
+/*==============================================================*/
+create index se_izvaja_na_FK on prevoz
+(
+   id_prevoza
+);
+
+/*==============================================================*/
+/* Table: prevoznik                                             */
+/*==============================================================*/
+create table prevoznik
+(
+   id_prevoznika                  int                            not null,
+   naslov_id                      int                            not null,
+   ime_prevoznika                 varchar(30),
+   primary key (id_prevoznika)
+);
+
+/*==============================================================*/
+/* Index: ima_sedež_FK                                          */
+/*==============================================================*/
+create index ima_sedež_FK on prevoznik
+(
+   naslov_id
+);
+
+/*==============================================================*/
+/* Table: prevozno_sredstvo                                     */
+/*==============================================================*/
+create table prevozno_sredstvo
+(
+   id_prevoza                     int                            not null,
+   id_prevoznika                  int                            not null,
+   id_transporta                  int,
+   registerska_oznacba            varchar(20),
+   st_sedezev                     int,
+   st_stojisc                     int,
+   primary key (id_prevoza)
+);
+
+/*==============================================================*/
+/* Index: v_lasti_FK                                            */
+/*==============================================================*/
+create index v_lasti_FK on prevozno_sredstvo
+(
+   id_prevoznika
+);
+
+/*==============================================================*/
+/* Index: je_tipa_FK                                            */
+/*==============================================================*/
+create index je_tipa_FK on prevozno_sredstvo
+(
+   id_transporta
+);
+
+/*==============================================================*/
+/* Table: racun                                                 */
+/*==============================================================*/
+create table racun
+(
+   stevilka_racuna                int                            not null,
+   id_vrste                       int                            not null,
+   id_vozovnice                   int                            not null,
+   datum_racuna                   date,
+   primary key (stevilka_racuna)
+);
+
+/*==============================================================*/
+/* Index: izdan_za_FK                                           */
+/*==============================================================*/
+create index izdan_za_FK on racun
+(
+   id_vozovnice
+);
+
+/*==============================================================*/
+/* Index: placa_z_FK                                            */
+/*==============================================================*/
+create index placa_z_FK on racun
+(
+   id_vrste
+);
+
+/*==============================================================*/
+/* Table: rezervacija                                           */
+/*==============================================================*/
+create table rezervacija
+(
+   st_sedeza                      int,
+   id_rezervacije                 int                            not null,
+   uporabnik_id                   int                            not null,
+   id_proge                       int                            not null,
+   id_prevoza                     int                            not null,
+   primary key (id_rezervacije)
+);
+
+/*==============================================================*/
+/* Index: na_prevozu_FK                                         */
+/*==============================================================*/
+create index na_prevozu_FK on rezervacija
+(
+   id_proge,
+   id_prevoza
+);
+
+/*==============================================================*/
+/* Index: ima_rezervacijo_FK                                    */
+/*==============================================================*/
+create index ima_rezervacijo_FK on rezervacija
+(
+   uporabnik_id
+);
+
+/*==============================================================*/
+/* Table: tip_transporta                                        */
+/*==============================================================*/
+create table tip_transporta
+(
+   id_transporta                  int                            not null,
+   Tip_transporta                 varchar(20),
+   primary key (id_transporta)
+);
+
+/*==============================================================*/
+/* Table: ulica                                                 */
+/*==============================================================*/
+create table ulica
+(
+   postna_stevilka                char(4)                        not null,
+   ulica                          varchar(20)                    not null,
+   primary key (postna_stevilka, ulica)
+);
+
+/*==============================================================*/
+/* Index: v_kraju_FK                                            */
+/*==============================================================*/
+create index v_kraju_FK on ulica
+(
+   postna_stevilka
+);
+
+/*==============================================================*/
+/* Table: uporabnik                                             */
+/*==============================================================*/
+create table uporabnik
+(
+   ime                            varchar(20),
+   priimek                        varchar(30),
+   status_veljaven                tinyint(1),
+   veljavnost                     date,
+   uporabnik_id                   int                            not null,
+   naslov_id                      int,
+   nas_naslov_id                  int                            not null,
+   primary key (uporabnik_id)
+);
+
+/*==============================================================*/
+/* Index: stalno_bivalisce_FK                                   */
+/*==============================================================*/
+create index stalno_bivalisce_FK on uporabnik
+(
+   nas_naslov_id
+);
+
+/*==============================================================*/
+/* Index: zacasno_bivalisce_FK                                  */
+/*==============================================================*/
+create index zacasno_bivalisce_FK on uporabnik
+(
+   naslov_id
+);
+
+/*==============================================================*/
+/* Table: vozni_red                                             */
+/*==============================================================*/
+create table vozni_red
+(
+   id_proge                       int                            not null,
+   proga_veljavna_od              date,
+   proga_veljavna_do              date,
+   primary key (id_proge)
+);
+
+/*==============================================================*/
+/* Table: vozovnica                                             */
+/*==============================================================*/
+create table vozovnica
+(
+   id_vozovnice                   int                            not null,
+   uporabnik_id                   int                            not null,
+   vozovnica_veljavna_do          date,
+   primary key (id_vozovnice)
+);
+
+/*==============================================================*/
+/* Index: ima_vozovnice_FK                                      */
+/*==============================================================*/
+create index ima_vozovnice_FK on vozovnica
+(
+   uporabnik_id
+);
+
+/*==============================================================*/
+/* Table: vozovnica_postajalisce                                */
+/*==============================================================*/
+create table vozovnica_postajalisce
+(
+   id_vozovnice                   int                            not null,
+   id_postajalisca                int                            not null,
+   primary key (id_vozovnice, id_postajalisca)
+);
+
+/*==============================================================*/
+/* Index: velja_za_FK                                           */
+/*==============================================================*/
+create index velja_za_FK on vozovnica_postajalisce
+(
+   id_vozovnice
+);
+
+/*==============================================================*/
+/* Index: pripada_FK                                            */
+/*==============================================================*/
+create index pripada_FK on vozovnica_postajalisce
+(
+   id_postajalisca
+);
+
+/*==============================================================*/
+/* Table: vrsta_placila                                         */
+/*==============================================================*/
+create table vrsta_placila
+(
+   id_vrste                       int                            not null,
+   ime_placila                    varchar(20)                    not null,
+   primary key (id_vrste)
+);

@@ -1,0 +1,116 @@
+1.  Ime vhodnega postajališča vezanega na vozovnico uporabnika
+
+select 
+    u.uporabnik_id, u.ime, 
+    u.priimek, ap.ime_postajalisca 
+from uporabnik u
+inner join vozovnica v on u.uporabnik_id = v.uporabnik_id
+inner join vozovnica_postajalisce vp on v.id_vozovnice = vp.id_vozovnice
+inner join avtobusno_postajalisce ap on vp.id_postajalisca = ap.id_postajalisca;
+
+
+2. Izpis voznega reda za linijo
+
+select pp.stevilka_postanka, 
+        ap.ime_postajalisca, 
+        pp.cas_prihoda, 
+        pp.cas_odhoda 
+from postajalisce_proga pp
+inner join avtobusno_postajalisce ap on pp.id_postajalisca = ap.id_postajalisca
+inner join vozni_red vr on pp.id_proge = vr.id_proge and vr.id_proge = 1001;
+
+
+3. Izpis podatkov o uporabniku in število vozovnic, ki mu pripada
+
+select
+       u.ime as "Ime",
+       u.priimek as "Priimek",
+       n.ulica as "Ulica",
+       n.hisna_stevilka as "Hišna številka",
+       k.postna_stevilka as "Pošta",
+       k.kraj as "Mesto",
+       (
+           select count(v.id_vozovnice)
+           from vozovnica v
+           where u.uporabnik_id = v.uporabnik_id
+           ) as "Število vozovnic"
+from uporabnik u
+inner join naslov n on u.nas_naslov_id = n.naslov_id
+inner join kraj k on n.postna_stevilka = k.postna_stevilka;
+
+
+4. Število rezervacij, ki jih je uporabnik opravil
+
+select u.ime, u.priimek, count(id_rezervacije) as "Število rezervacij"
+from rezervacija
+inner join uporabnik u on rezervacija.uporabnik_id = u.uporabnik_id
+group by u.ime, u.priimek;
+
+
+5. Število prostih rezervacij na liniji
+
+select distinct
+    p2.ime_prevoznika,
+    tt.ime_transporta,
+    (p.st_rezervacij - count(r.id_rezervacije)) as "Proste rezervacije"
+from rezervacija r
+inner join prevoz p on r.id_proge = p.id_proge and r.id_transporta = p.id_transporta
+inner join tip_transporta tt on p.id_transporta = tt.id_transporta
+inner join prevoznik p2 on tt.id_prevoznika = p2.id_prevoznika
+where p.st_rezervacij != 0
+group by tt.ime_transporta, p2.ime_prevoznika, p.st_rezervacij;
+
+
+6.
+select v.id_vozovnice as "Številka vozovnice",
+       r.stevilka_racuna as "Številka računa",
+        (
+            select sum(c.cena)
+            from cenik c
+            inner join "postavka račun" pr on c.id_postavke = pr.id_postavke
+            inner join racun rr on pr.stevilka_racuna = rr.stevilka_racuna
+            where pr.stevilka_racuna = r.stevilka_racuna
+        ) as "Skupni znesek",
+        vp.ime_placila as "Način plačila"
+from vozovnica v
+inner join racun r on v.id_vozovnice = r.id_vozovnice
+inner join "postavka račun" pr on r.stevilka_racuna = pr.stevilka_racuna
+inner join cenik c on pr.id_postavke = c.id_postavke
+inner join vrsta_placila vp on r.ime_placila = vp.ime_placila
+group by v.id_vozovnice, r.stevilka_racuna, vp.ime_placila;
+
+7.
+select r.stevilka_racuna as "Številka računa",
+       c.ime_postavke as "Ime postavke",
+       c.cena as "Cena postavke"
+from racun r
+inner join "postavka račun" pr on r.stevilka_racuna = pr.stevilka_racuna
+inner join cenik c on pr.id_postavke = c.id_postavke
+where r.stevilka_racuna = 654;
+
+8.
+select distinct p.ime_prevoznika as "Prevoznik",
+        count(tt.id_transporta) as "Število prevoznih sredstev"
+from prevoznik p
+inner join tip_transporta tt on p.id_prevoznika = tt.id_prevoznika
+group by p.ime_prevoznika;
+
+9.
+select p.ime_prevoznika as "Prevoznik",
+       n.ulica as "Ulica",
+       n.hisna_stevilka as "Hišna Številka",
+       n.postna_stevilka as "Poštna številka",
+       k.kraj as "Mesto"
+from prevoznik p
+inner join naslov n on p.naslov_id = n.naslov_id
+inner join kraj k on n.postna_stevilka = k.postna_stevilka;
+
+10.
+select p.ime_prevoznika as "Prevoznik",
+       n.ulica as "Ulica",
+       n.hisna_stevilka as "Hišna Številka",
+       n.postna_stevilka as "Poštna številka",
+       k.kraj as "Mesto"
+from prevoznik p
+inner join naslov n on p.naslov_id = n.naslov_id
+inner join kraj k on n.postna_stevilka = k.postna_stevilka;
